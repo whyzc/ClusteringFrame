@@ -4,7 +4,7 @@ import java.util.List;
 
 import similarity.TextModel;
 
-public interface KMeans
+public interface KMeans<T>
 {
 	/**
 	 * KMeans算法
@@ -12,5 +12,5 @@ public interface KMeans
 	 * @param k 类型数
 	 * @return k个簇
 	 */
-	public List<Group> kMeans(List<TextModel> tm , int k);
+	public List<Group<T>> kMeans(List<TextModel<T>> tm , int k);
 }

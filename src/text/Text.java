@@ -11,7 +11,7 @@ public abstract class Text
 
 	public Text()
 	{
-		setText();
+		
 	}
 	
 	public String getContent()
@@ -59,17 +59,6 @@ public abstract class Text
 	{
 		this.feature = feature;
 	}
-
-	public Text(String content, String title, int no)
-	{
-		this.content = content;
-		this.title = title;
-		this.no = no; 
-		setText();
-	}
-	
-
-	public abstract void setText();
 
 
 	@Override

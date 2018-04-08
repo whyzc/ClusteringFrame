@@ -10,21 +10,21 @@ import text.Text;
  * @author yzc
  *
  */
-public interface UserHAC
+public interface UserHAC<T>
 {
 	/**
 	 * HAC算法
 	 * @param pos 文件位置
 	 * @return 一个层次簇
 	 */
-	public Group hac(String pos);
+	public Group<T> hac(String pos);
 	
 	/**
 	 * HAC算法
 	 * @param ts 一组文本
 	 * @return 一个层次簇
 	 */
-	public Group hac(List<Text> ts);
+	public Group<T> hac(List<Text> ts);
 	
 	/**
 	 * 将层次簇分解成k个簇
@@ -32,7 +32,7 @@ public interface UserHAC
 	 * @param k 需分解的个数
 	 * @return k个簇
 	 */
-	public List<Group> split(Group grp, int k);
+	public List<Group<T>> split(Group<T> grp, int k);
 	
 	
 	/**
@@ -41,5 +41,5 @@ public interface UserHAC
 	 * @param sim 相识度
 	 * @return 一组簇
 	 */
-	public List<Group> split(Group grp, double sim);
+	public List<Group<T>> split(Group<T> grp, double sim);
 }
