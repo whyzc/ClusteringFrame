@@ -1,4 +1,4 @@
-package test2;
+package instance;
 
 import java.util.*;
 import clustering.Group;
