@@ -5,7 +5,7 @@ import java.util.List;
 import text.Text;
 
 /**
- * 
+ * 建立文本模型
  * @author yzc
  * 
  */

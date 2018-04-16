@@ -1,8 +1,13 @@
-package instance;
+package implement;
 
 import similarity.TextModel;
 
-public class TextModel_2 extends TextModel<String>
+/**
+ * 基于字的文本模型
+ * @author yzc
+ *
+ */
+public class TextModelWordBased extends TextModel<String>
 {
 	
 	@Override
@@ -10,7 +15,7 @@ public class TextModel_2 extends TextModel<String>
 	{
 		// TODO Auto-generated method stub
 		double count = 0;
-		TextModel_2 tm2 = (TextModel_2)tm;
+		TextModelWordBased tm2 = (TextModelWordBased)tm;
 		for (int i=0 ; i<this.getTextModel().size() ; i++)
 		{
 			String str = this.getTextModel().get(i);

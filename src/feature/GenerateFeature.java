@@ -2,11 +2,11 @@ package feature;
 
 import text.Text;
 
-//public interface GenerateFeature<K, V>
-//{
-//	public FeatureMap<K,V> generateFeature(Text t);
-//}
-
+/**
+ * 提取文本特征，并将特征写入文本内部
+ * @author yzc
+ *
+ */
 public interface GenerateFeature
 {
 	/**

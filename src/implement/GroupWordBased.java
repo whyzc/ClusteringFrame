@@ -1,16 +1,21 @@
-package instance;
+package implement;
 
 import java.util.*;
 
-import clustering.Group;
+import clusteringLayer.Group;
 import similarity.TextModel;
 
-public class Group_2 extends Group<String>
+/**
+ * 根据以字生成的文本模型而建立的簇
+ * @author yzc
+ *
+ */
+public class GroupWordBased extends Group<String>
 {
 
-	public Group_2()
+	public GroupWordBased()
 	{
-		clusterPoint = new TextModel_2();
+		clusterPoint = new TextModelWordBased();
 	}
 	
 	@Override
@@ -23,7 +28,7 @@ public class Group_2 extends Group<String>
 		}
 		
 		List<String> common = new ArrayList<String>();
-		common.addAll( ((TextModel_2)member.get(0)).getTextModel() );
+		common.addAll( ((TextModelWordBased)member.get(0)).getTextModel() );
 				//((TextModel_2)member.get(0)).getTextModel();		//记录member中各成员文本模型的交集
 		
 		for (int i=1 ; i<common.size() ; i++)					//求member中各成员文本模型的交集
@@ -33,7 +38,7 @@ public class Group_2 extends Group<String>
 			String word = common.get(i);
 			for (int j=1 ; j<member.size() ; j++)
 			{
-				if ( ((TextModel_2)member.get(j)).getTextModel().contains(word) )
+				if ( ((TextModelWordBased)member.get(j)).getTextModel().contains(word) )
 				{
 					continue;
 				}
@@ -44,10 +49,10 @@ public class Group_2 extends Group<String>
 		}
 		
 		/***************验证common与原聚点是否相同，不相同则更新聚点并返回false，相同则返回true*******************/
-		List<String> s = ((TextModel_2)clusterPoint).getTextModel();
+		List<String> s = ((TextModelWordBased)clusterPoint).getTextModel();
 		if (s.size() != common.size())
 		{
-			((TextModel_2)clusterPoint).setTextModel(common);
+			((TextModelWordBased)clusterPoint).setTextModel(common);
 			return false;
 		}
 		
@@ -55,7 +60,7 @@ public class Group_2 extends Group<String>
 		{
 			if (!s.contains(common.get(i)))
 			{
-				((TextModel_2)clusterPoint).setTextModel(common);
+				((TextModelWordBased)clusterPoint).setTextModel(common);
 				return false;
 			}
 		}
@@ -68,11 +73,11 @@ public class Group_2 extends Group<String>
 	{
 		// TODO Auto-generated method stub
 		
-		TextModel_2 tm2 = (TextModel_2)clusterPoint;
+		TextModelWordBased tm2 = (TextModelWordBased)clusterPoint;
 		
-		if (tm instanceof TextModel_2)
+		if (tm instanceof TextModelWordBased)
 		{
-			tm2.setTextModel( ((TextModel_2)tm).getTextModel() );
+			tm2.setTextModel( ((TextModelWordBased)tm).getTextModel() );
 		}
 		else 
 		{

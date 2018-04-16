@@ -1,15 +1,21 @@
-package instance;
+package implement;
 
 import java.util.*;
-import clustering.Group;
+
 import clustering.KMeans;
+import clusteringLayer.Group;
+import clusteringLayer.KMeansAlgo;
 import feature.GenerateFeature;
 import similarity.EstablishModel;
 import similarity.TextModel;
 import text.Text;
-import user.UserKMeans;
 
-public class UserKMeans_2 implements UserKMeans<String>
+/**
+ * 面向客户使用的KMeans接口的实现
+ * @author yzc
+ *
+ */
+public class KMeansImpl implements KMeans<String>
 {
 
 	@Override
@@ -24,7 +30,7 @@ public class UserKMeans_2 implements UserKMeans<String>
 	{
 		// TODO Auto-generated method stub
 		/***************对文本生成特征******************/
-		GenerateFeature gf = new GenerateFeature_2();
+		GenerateFeature gf = new GenerateFeatureWordBased();
 		for (int i=0 ; i<ts.size() ; i++)
 		{
 			gf.generateFeature(ts.get(i));
@@ -32,12 +38,12 @@ public class UserKMeans_2 implements UserKMeans<String>
 		
 		
 		/*****************生成文本模型*********************/	
-		EstablishModel<String> em = new EstablishModel_2();
+		EstablishModel<String> em = new EstablishModelWordBased();
 		List<TextModel<String>> tms = em.modeling(ts);
 		
 		
 		/*****************KMeans算法*********************/	
-		KMeans<String> km = new KMeans_2();
+		KMeansAlgo<String> km = new KMeansAlgoImpl();
 		List<Group<String>> g = km.kMeans(tms, k);
 		
 		return g;

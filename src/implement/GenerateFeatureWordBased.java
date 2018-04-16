@@ -1,4 +1,4 @@
-package instance;
+package implement;
 
 import java.util.*;
 
@@ -6,11 +6,11 @@ import feature.GenerateFeature;
 import text.Text;
 
 /**
- * 该类用于生成文本特征，并将模型存入文本内。
+ * 基于字生成文本特征，并将模型存入文本内。
  * @author yzc
  *
  */
-public class GenerateFeature_2 implements GenerateFeature
+public class GenerateFeatureWordBased implements GenerateFeature
 {
 
 	@Override

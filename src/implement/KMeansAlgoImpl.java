@@ -1,13 +1,18 @@
-package instance;
+package implement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import clustering.Group;
-import clustering.KMeans;
+import clusteringLayer.Group;
+import clusteringLayer.KMeansAlgo;
 import similarity.TextModel;
 
-public class KMeans_2 implements KMeans<String>
+/**
+ * KMeans算法层的实现
+ * @author yzc
+ *
+ */
+public class KMeansAlgoImpl implements KMeansAlgo<String>
 {
 	private final int TIMES = 5;
 	public List<Group<String>> groups = new ArrayList<Group<String>>();			//簇
@@ -27,7 +32,7 @@ public class KMeans_2 implements KMeans<String>
 		
 		for (int i=0 ; i<k ; i++)				//初始化k个簇，并设置初始聚点
 		{
-			Group<String> g = new Group_2();
+			Group<String> g = new GroupWordBased();
 			g.setClusterPoint(tm.get(i));	
 			groups.add(g);
 		}

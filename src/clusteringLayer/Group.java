@@ -1,14 +1,9 @@
-package clustering;
+package clusteringLayer;
 
 import java.util.*;
 
 import similarity.TextModel;
 
-/**
- * 
- * @author yzc
- * @version V1.0
- */
 public abstract class Group<T>
 {
 	protected List<TextModel<T>> member = new ArrayList<TextModel<T>>();			//成员，用于KMeans

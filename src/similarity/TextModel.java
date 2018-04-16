@@ -2,6 +2,12 @@ package similarity;
 
 import java.util.*;
 
+/**
+ * 文本模型
+ * @author yzc
+ *
+ * @param <T> 文本模型的单个元素的数据类型
+ */
 public abstract class TextModel<T>
 {
 	protected List<T> textModel = new ArrayList<T>();				//文本模型

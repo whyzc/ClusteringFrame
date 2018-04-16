@@ -2,17 +2,44 @@ package clustering;
 
 import java.util.List;
 
-import similarity.TextModel;
+import clusteringLayer.Group;
+import text.Text;
 
+/**
+ * 面向用户的HAC算法接口
+ * @author yzc
+ *
+ */
 public interface HAC<T>
 {
 	/**
-	 * 将一组文本模型按层次聚类合并成一个簇
-	 * @param tms 需合并的一组模型
-	 * @return 合并后的层次簇
+	 * HAC算法
+	 * @param pos 文件位置
+	 * @return 一个层次簇
 	 */
-	public Group<T> merge(List<TextModel<T>> tms);
+	public Group<T> hac(String pos);
+	
+	/**
+	 * HAC算法
+	 * @param ts 一组文本
+	 * @return 一个层次簇
+	 */
+	public Group<T> hac(List<Text> ts);
+	
+	/**
+	 * 将层次簇分解成k个簇
+	 * @param grp 待分解的层次簇
+	 * @param k 需分解的个数
+	 * @return k个簇
+	 */
+	public List<Group<T>> split(Group<T> grp, int k);
 	
 	
-	
+	/**
+	 * 将层次簇按相识度分成一组簇
+	 * @param grp 待分解的层次簇
+	 * @param sim 相识度
+	 * @return 一组簇
+	 */
+	public List<Group<T>> split(Group<T> grp, double sim);
 }

@@ -1,4 +1,4 @@
-package instance;
+package implement;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +7,12 @@ import similarity.TextModel;
 import similarity.EstablishModel;
 import text.Text;
 
-public class EstablishModel_2 implements EstablishModel<String>
+/**
+ * 基于字建立文本模型
+ * @author yzc
+ *
+ */
+public class EstablishModelWordBased implements EstablishModel<String>
 {
 
 	@Override
@@ -18,7 +23,7 @@ public class EstablishModel_2 implements EstablishModel<String>
 		
 		for(int i=0 ; i<ts.size() ; i++)			//对ts中所有的文本依次建立文本模型，并加入到result中
 		{
-			TextModel_2 tm = new TextModel_2();
+			TextModelWordBased tm = new TextModelWordBased();
 			
 			Iterator<String> it = ts.get(i).getFeature().keySet().iterator();
 			

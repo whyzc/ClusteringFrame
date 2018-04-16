@@ -1,12 +1,17 @@
-package instance;
+package implement;
 
 import java.util.*;
 
-import clustering.Group;
-import clustering.HAC;
+import clusteringLayer.Group;
+import clusteringLayer.HACAlgo;
 import similarity.TextModel;
 
-public class HAC_2 implements HAC<String>
+/**
+ * HAC算法层的实现
+ * @author yzc
+ *
+ */
+public class HACAlgoImpl implements HACAlgo<String>
 {
 	@Override
 	public Group<String> merge(List<TextModel<String>> tms)
@@ -15,7 +20,7 @@ public class HAC_2 implements HAC<String>
 		List<Group<String>> grps = new ArrayList<Group<String>>();
 		for (int i=0 ; i<tms.size() ; i++)				//每一个文本分为一个簇
 		{
-			Group<String> g = new Group_2();
+			Group<String> g = new GroupWordBased();
 			g.setInitialMember(tms.get(i));
 			grps.add(g);
 		}
