@@ -6,8 +6,8 @@ import clustering.KMeans;
 import clusteringLayer.Group;
 import clusteringLayer.KMeansAlgo;
 import feature.GenerateFeature;
-import similarity.EstablishModel;
-import similarity.TextModel;
+import model.EstablishModel;
+import model.TextModel;
 import text.Text;
 
 /**
@@ -15,18 +15,18 @@ import text.Text;
  * @author yzc
  *
  */
-public class KMeansImpl implements KMeans<String>
+public class KMeansImpl implements KMeans
 {
 
 	@Override
-	public List<Group<String>> kMeans(String pos , int k)
+	public List<Group> kMeans(String pos , int k)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Group<String>> kMeans(List<Text> ts , int k)
+	public List<Group> kMeans(List<Text> ts , int k)
 	{
 		// TODO Auto-generated method stub
 		/***************对文本生成特征******************/
@@ -38,13 +38,13 @@ public class KMeansImpl implements KMeans<String>
 		
 		
 		/*****************生成文本模型*********************/	
-		EstablishModel<String> em = new EstablishModelWordBased();
-		List<TextModel<String>> tms = em.modeling(ts);
+		EstablishModel em = new EstablishModelWordBased();
+		List<TextModel> tms = em.modeling(ts);
 		
 		
 		/*****************KMeans算法*********************/	
-		KMeansAlgo<String> km = new KMeansAlgoImpl();
-		List<Group<String>> g = km.kMeans(tms, k);
+		KMeansAlgo km = new KMeansAlgoImpl();
+		List<Group> g = km.kMeans(tms, k);
 		
 		return g;
 	}

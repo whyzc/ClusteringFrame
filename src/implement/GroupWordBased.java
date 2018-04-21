@@ -3,14 +3,14 @@ package implement;
 import java.util.*;
 
 import clusteringLayer.Group;
-import similarity.TextModel;
+import model.TextModel;
 
 /**
  * 根据以字生成的文本模型而建立的簇
  * @author yzc
  *
  */
-public class GroupWordBased extends Group<String>
+public class GroupWordBased extends Group
 {
 
 	public GroupWordBased()
@@ -27,15 +27,15 @@ public class GroupWordBased extends Group<String>
 			throw new RuntimeException("簇内无成员");
 		}
 		
-		List<String> common = new ArrayList<String>();
+		List common = new ArrayList();
 		common.addAll( ((TextModelWordBased)member.get(0)).getTextModel() );
 				//((TextModel_2)member.get(0)).getTextModel();		//记录member中各成员文本模型的交集
 		
 		for (int i=1 ; i<common.size() ; i++)					//求member中各成员文本模型的交集
 		{
 			
-			//new ArrayList<String>()
-			String word = common.get(i);
+			//new ArrayList()
+			String word = (String)common.get(i);
 			for (int j=1 ; j<member.size() ; j++)
 			{
 				if ( ((TextModelWordBased)member.get(j)).getTextModel().contains(word) )
@@ -49,7 +49,7 @@ public class GroupWordBased extends Group<String>
 		}
 		
 		/***************验证common与原聚点是否相同，不相同则更新聚点并返回false，相同则返回true*******************/
-		List<String> s = ((TextModelWordBased)clusterPoint).getTextModel();
+		List s = ((TextModelWordBased)clusterPoint).getTextModel();
 		if (s.size() != common.size())
 		{
 			((TextModelWordBased)clusterPoint).setTextModel(common);
@@ -69,7 +69,7 @@ public class GroupWordBased extends Group<String>
 	}
 
 	@Override
-	public void setClusterPoint(TextModel<String> tm)
+	public void setClusterPoint(TextModel tm)
 	{
 		// TODO Auto-generated method stub
 		
@@ -86,11 +86,11 @@ public class GroupWordBased extends Group<String>
 			
 	}
 	
-	private double sim(TextModel<String> tm, Group<String> g)
+	private double sim(TextModel tm, Group g)
 	{
-		List<Group<String>> queue = new ArrayList<Group<String>>();			//队列，用于遍历g
+		List<Group> queue = new ArrayList<Group>();			//队列，用于遍历g
 		double max = 0;										//存放最大相识度的值
-		List<Group<String>> grps;									//存放子簇序列
+		List<Group> grps;									//存放子簇序列
 		max = tm.sim(g.getInitialMember());
 		
 		
@@ -105,7 +105,7 @@ public class GroupWordBased extends Group<String>
 		
 		while (!queue.isEmpty())				//队列不为空
 		{
-			Group<String> top = queue.get(0);			//取出队首
+			Group top = queue.get(0);			//取出队首
 			queue.remove(0);
 			double s = tm.sim(top.getInitialMember());
 			if (s > max)							/****此处取相似度最大的值返回******/
@@ -126,11 +126,11 @@ public class GroupWordBased extends Group<String>
 	}
 	
 	
-	public double sim(Group<String> g)				//返回本簇与簇g的相识度
+	public double sim(Group g)				//返回本簇与簇g的相识度
 	{
-		List<Group<String>> queue = new ArrayList<Group<String>>();
+		List<Group> queue = new ArrayList<Group>();
 		double max = 0;
-		List<Group<String>> grps;
+		List<Group> grps;
 		max = this.sim(this.getInitialMember() , g);
 		
 		if (!this.isSubGroupEmpty())				//如果本簇中有子簇，将子簇全部压入栈
@@ -144,7 +144,7 @@ public class GroupWordBased extends Group<String>
 		
 		while (!queue.isEmpty())				//队列不为空
 		{
-			Group<String> top = queue.get(0);			//取出队首
+			Group top = queue.get(0);			//取出队首
 			double s = this.sim(top.getInitialMember(), g);
 			if (s > max)							/****此处取相似度最大的值返回******/
 			{

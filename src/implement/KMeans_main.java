@@ -24,8 +24,8 @@ public class KMeans_main
 		ts.add(t3);
 		
 		/*************调用KMeans**************/
-		KMeans<String> userkm = new KMeansImpl();
-		List<Group<String>> g = userkm.kMeans(ts, K);
+		KMeans userkm = new KMeansImpl();
+		List<Group> g = userkm.kMeans(ts, K);
 		
 		
 		/*****************打印聚类结果*********************/

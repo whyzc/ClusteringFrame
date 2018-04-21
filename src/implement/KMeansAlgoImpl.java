@@ -5,20 +5,20 @@ import java.util.List;
 
 import clusteringLayer.Group;
 import clusteringLayer.KMeansAlgo;
-import similarity.TextModel;
+import model.TextModel;
 
 /**
  * KMeans算法层的实现
  * @author yzc
  *
  */
-public class KMeansAlgoImpl implements KMeansAlgo<String>
+public class KMeansAlgoImpl implements KMeansAlgo
 {
 	private final int TIMES = 5;
-	public List<Group<String>> groups = new ArrayList<Group<String>>();			//簇
+	public List<Group> groups = new ArrayList<Group>();			//簇
 	
 	@Override
-	public List<Group<String>> kMeans(List<TextModel<String>> tm, int k)
+	public List<Group> kMeans(List<TextModel> tm, int k)
 	{
 		// TODO Auto-generated method stub
 		boolean sign = true;
@@ -32,7 +32,7 @@ public class KMeansAlgoImpl implements KMeansAlgo<String>
 		
 		for (int i=0 ; i<k ; i++)				//初始化k个簇，并设置初始聚点
 		{
-			Group<String> g = new GroupWordBased();
+			Group g = new GroupWordBased();
 			g.setClusterPoint(tm.get(i));	
 			groups.add(g);
 		}
@@ -72,7 +72,7 @@ public class KMeansAlgoImpl implements KMeansAlgo<String>
 		return groups;
 	}
 	
-	int minDistanceGroup(TextModel<String> tm)		//返回文本模型tm与聚点集合u中距离最近的聚点位子
+	int minDistanceGroup(TextModel tm)		//返回文本模型tm与聚点集合u中距离最近的聚点位子
 	{
 		int minDistanceSite = -1;
 		double minDistance;

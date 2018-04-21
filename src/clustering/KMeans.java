@@ -10,7 +10,7 @@ import text.Text;
  * @author yzc
  *
  */
-public interface KMeans<T>
+public interface KMeans
 {
 	/**
 	 * KMeans算法
@@ -18,7 +18,7 @@ public interface KMeans<T>
 	 * @param k 种类个数
 	 * @return k个簇
 	 */
-	public List<Group<T>> kMeans(String pos , int k);
+	public List<Group> kMeans(String pos , int k);
 	
 	/**
 	 * KMeans算法
@@ -26,5 +26,5 @@ public interface KMeans<T>
 	 * @param k 种类个数
 	 * @return k个簇
 	 */
-	public List<Group<T>> kMeans(List<Text> ts , int k);
+	public List<Group> kMeans(List<Text> ts , int k);
 }

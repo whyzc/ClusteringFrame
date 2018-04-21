@@ -2,15 +2,15 @@ package clusteringLayer;
 
 import java.util.*;
 
-import similarity.TextModel;
+import model.TextModel;
 
-public abstract class Group<T>
+public abstract class Group
 {
-	protected List<TextModel<T>> member = new ArrayList<TextModel<T>>();			//成员，用于KMeans
-	protected List<Group<T>> subGroup = new ArrayList<Group<T>>();				//层次子簇
+	protected List<TextModel> member = new ArrayList<TextModel>();			//成员，用于KMeans
+	protected List<Group> subGroup = new ArrayList<Group>();				//层次子簇
 	protected List<Double> simValue = new ArrayList<Double>();				//层次相似度
-	protected TextModel<T> clusterPoint = null; 								//聚点，用于KMeans
-	protected TextModel<T> initialMember;										//初始成员，用于层次聚类
+	protected TextModel clusterPoint = null; 								//聚点，用于KMeans
+	protected TextModel initialMember;										//初始成员，用于层次聚类
 	
 	/**
 	 * 根据member中的成员更新聚点
@@ -24,14 +24,14 @@ public abstract class Group<T>
 	 * @param g	与本簇比较的簇
 	 * @return	两簇的相识度
 	 */
-	public abstract double sim(Group<T> g);					//求簇间的相识度，用于层次聚类
+	public abstract double sim(Group g);					//求簇间的相识度，用于层次聚类
 	
 	
 	/**
 	 * 获取聚点
 	 * @return 返回聚点
 	 */
-	public TextModel<T> getClusterPoint()
+	public TextModel getClusterPoint()
 	{
 		return this.clusterPoint;
 	}
@@ -40,7 +40,7 @@ public abstract class Group<T>
 	 * 设置聚点，往往只用于簇的初始化，用于KMeans算法
 	 * @param clusterPoint 须要设置成的聚点
 	 */
-	public void setClusterPoint(TextModel<T> clusterPoint)		//设置聚点，往往只用于簇的初始化，用于KMeans算法
+	public void setClusterPoint(TextModel clusterPoint)		//设置聚点，往往只用于簇的初始化，用于KMeans算法
 	{
 		this.clusterPoint = clusterPoint;
 	}
@@ -50,7 +50,7 @@ public abstract class Group<T>
 	 * 将单个文本模型加入到本簇中
 	 * @param member 需加入的文本模型
 	 */
-	public void addMember(TextModel<T> member)						//增加成员
+	public void addMember(TextModel member)						//增加成员
 	{
 		this.member.add(member);
 	}
@@ -59,7 +59,7 @@ public abstract class Group<T>
 	 * 将一组文本模型加入到本簇中
 	 * @param members 需入的一组文本模型
 	 */
-	public void addMember(List<TextModel<T>> members)				//增加成员
+	public void addMember(List<TextModel> members)				//增加成员
 	{
 		for (int i=0 ; i<members.size() ; i++)
 		{
@@ -89,7 +89,7 @@ public abstract class Group<T>
 	 * @param grp 需压入栈的簇
 	 * @param s 需压入栈的相识度
 	 */
-	public void pop(Group<T> grp , Double s)					//压入簇的栈和对应的相识度的栈
+	public void pop(Group grp , Double s)					//压入簇的栈和对应的相识度的栈
 	{
 		subGroup.add(grp);
 		simValue.add(s);
@@ -99,11 +99,11 @@ public abstract class Group<T>
 	 * 弹出子簇栈尾的簇
 	 * @return 弹出的簇
 	 */
-	public Group<T> pushGroup()								//弹出栈尾的簇
+	public Group pushGroup()								//弹出栈尾的簇
 	{
 		if (subGroup.size() < 1)
 			return null;
-		Group<T> g = subGroup.get(subGroup.size()-1);
+		Group g = subGroup.get(subGroup.size()-1);
 		subGroup.remove(subGroup.size()-1);
 		return g;
 	}
@@ -152,7 +152,7 @@ public abstract class Group<T>
 	 * 获取子簇
 	 * @return	返回子簇
 	 */
-	public List<Group<T>> getSubGroup()					//获取子簇
+	public List<Group> getSubGroup()					//获取子簇
 	{
 		return subGroup;
 	}
@@ -161,7 +161,7 @@ public abstract class Group<T>
 	 * 获取本簇所有成员
 	 * @return 本簇所有成员
 	 */
-	public List<TextModel<T>> getMember()					//获取成员
+	public List<TextModel> getMember()					//获取成员
 	{
 		return member;
 	}
@@ -170,7 +170,7 @@ public abstract class Group<T>
 	 * 设置本簇成员
 	 * @param members 需设置的成员
 	 */
-	public void setMember(List<TextModel<T>> members)
+	public void setMember(List<TextModel> members)
 	{
 		this.member = members;
 	}
@@ -197,7 +197,7 @@ public abstract class Group<T>
 	 * 设置子簇
 	 * @param subGroup 需设置的子簇
 	 */
-	public void setSubGroup(List<Group<T>> subGroup)
+	public void setSubGroup(List<Group> subGroup)
 	{
 		this.subGroup = subGroup;
 	}
@@ -206,7 +206,7 @@ public abstract class Group<T>
 	 * 获取初始成员
 	 * @return 初始成员
 	 */
-	public TextModel<T> getInitialMember()
+	public TextModel getInitialMember()
 	{
 		return initialMember;
 	}
@@ -215,7 +215,7 @@ public abstract class Group<T>
 	 * 设置初始成员
 	 * @param initialMember 需设置的初始成员
 	 */
-	public void setInitialMember(TextModel<T> initialMember)
+	public void setInitialMember(TextModel initialMember)
 	{
 		this.initialMember = initialMember;
 	}

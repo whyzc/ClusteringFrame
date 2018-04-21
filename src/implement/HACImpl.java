@@ -6,8 +6,8 @@ import clustering.HAC;
 import clusteringLayer.Group;
 import clusteringLayer.HACAlgo;
 import feature.GenerateFeature;
-import similarity.EstablishModel;
-import similarity.TextModel;
+import model.EstablishModel;
+import model.TextModel;
 import text.Text;
 
 /**
@@ -15,10 +15,10 @@ import text.Text;
  * @author yzc
  *
  */
-public class HACImpl implements HAC<String>
+public class HACImpl implements HAC
 {
 	@Override
-	public Group<String> hac(List<Text> ts)
+	public Group hac(List<Text> ts)
 	{
 		// TODO Auto-generated method stub
 		/***************对文本生成特征******************/
@@ -30,13 +30,13 @@ public class HACImpl implements HAC<String>
 		
 		
 		/*****************生成文本模型*********************/	
-		EstablishModel<String> em = new EstablishModelWordBased();
-		List<TextModel<String>> tms = em.modeling(ts);
+		EstablishModel em = new EstablishModelWordBased();
+		List<TextModel> tms = em.modeling(ts);
 		
 		
 		/*****************KMeans算法*********************/	
-		HACAlgo<String> hac = new HACAlgoImpl();
-		Group<String> g = hac.merge(tms);
+		HACAlgo hac = new HACAlgoImpl();
+		Group g = hac.merge(tms);
 		
 		return g;
 	}
@@ -44,7 +44,7 @@ public class HACImpl implements HAC<String>
 	
 
 	@Override
-	public Group<String> hac(String pos)
+	public Group hac(String pos)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -53,7 +53,7 @@ public class HACImpl implements HAC<String>
 
 
 	@Override
-	public List<Group<String>> split(Group<String> grp, int k)
+	public List<Group> split(Group grp, int k)
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -62,7 +62,7 @@ public class HACImpl implements HAC<String>
 
 
 	@Override
-	public List<Group<String>> split(Group<String> grp, double sim)
+	public List<Group> split(Group grp, double sim)
 	{
 		// TODO Auto-generated method stub
 		return null;

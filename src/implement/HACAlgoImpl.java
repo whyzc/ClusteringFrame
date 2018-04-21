@@ -4,23 +4,23 @@ import java.util.*;
 
 import clusteringLayer.Group;
 import clusteringLayer.HACAlgo;
-import similarity.TextModel;
+import model.TextModel;
 
 /**
  * HAC算法层的实现
  * @author yzc
  *
  */
-public class HACAlgoImpl implements HACAlgo<String>
+public class HACAlgoImpl implements HACAlgo
 {
 	@Override
-	public Group<String> merge(List<TextModel<String>> tms)
+	public Group merge(List<TextModel> tms)
 	{
 		// TODO Auto-generated method stub
-		List<Group<String>> grps = new ArrayList<Group<String>>();
+		List<Group> grps = new ArrayList<Group>();
 		for (int i=0 ; i<tms.size() ; i++)				//每一个文本分为一个簇
 		{
-			Group<String> g = new GroupWordBased();
+			Group g = new GroupWordBased();
 			g.setInitialMember(tms.get(i));
 			grps.add(g);
 		}
@@ -79,13 +79,13 @@ public class HACAlgoImpl implements HACAlgo<String>
 		return site;
 	}
 	
-	private static void mergeGroup(List<Group<String>> gs, int i, int j , double[][] m)		//将j位置的Group合并入i位置的Group
+	private static void mergeGroup(List<Group> gs, int i, int j , double[][] m)		//将j位置的Group合并入i位置的Group
 	{
 		gs.get(i).pop(gs.get(j), m[i][j]);
 		gs.remove(j);
 	}
 	
-	private static void updataMatrix(double[][] m, int i, int j, int q, List<Group<String>> grps)		//合并后，删除矩阵
+	private static void updataMatrix(double[][] m, int i, int j, int q, List<Group> grps)		//合并后，删除矩阵
 	{																			//中j行和j列的数，并重新计算新Group的距离
 		//删除j行和j列
 		for (int k=j ; k<q-1 ; k++)

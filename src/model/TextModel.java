@@ -1,4 +1,4 @@
-package similarity;
+package model;
 
 import java.util.*;
 
@@ -6,11 +6,11 @@ import java.util.*;
  * 文本模型
  * @author yzc
  *
- * @param <T> 文本模型的单个元素的数据类型
+ * @param  文本模型的单个元素的数据类型
  */
-public abstract class TextModel<T>
+public abstract class TextModel
 {
-	protected List<T> textModel = new ArrayList<T>();				//文本模型
+	protected List textModel = new ArrayList();				//文本模型
 	protected int no = -1;											//文本编号
 	protected String title = null;									//文本标题
 	
@@ -19,14 +19,14 @@ public abstract class TextModel<T>
 	 * @param tm 被比较的文本模型
 	 * @return 两模型间的距离
 	 */
-	public abstract double distance(TextModel<T> tm);
+	public abstract double distance(TextModel tm);
 	
 	/**
 	 * 计算两模型间的相识度
 	 * @param tm 被比较的文本模型
 	 * @return 两模型间的相识度
 	 */
-	public abstract double sim(TextModel<T> tm);
+	public abstract double sim(TextModel tm);
 	
 	/**
 	 * 设置文本模型
@@ -72,7 +72,7 @@ public abstract class TextModel<T>
 	/**获取文本模型
 	 * @return 文本模型
 	 */
-	public List<T> getTextModel()
+	public List getTextModel()
 	{
 		return textModel;
 	}
@@ -80,7 +80,7 @@ public abstract class TextModel<T>
 	/**设置文本模型
 	 * @param textModel 需设置的文本模型
 	 */
-	public void setTextModel(List<T> textModel)
+	public void setTextModel(List textModel)
 	{
 		this.textModel = textModel;
 	}

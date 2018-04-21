@@ -3,8 +3,9 @@ package implement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import similarity.TextModel;
-import similarity.EstablishModel;
+
+import model.EstablishModel;
+import model.TextModel;
 import text.Text;
 
 /**
@@ -12,24 +13,24 @@ import text.Text;
  * @author yzc
  *
  */
-public class EstablishModelWordBased implements EstablishModel<String>
+public class EstablishModelWordBased implements EstablishModel
 {
 
 	@Override
-	public List<TextModel<String>> modeling(List<Text> ts)
+	public List<TextModel> modeling(List<Text> ts)
 	{
 		// TODO Auto-generated method stub
-		List<TextModel<String>> result = new ArrayList<TextModel<String>>();		//记录所有生成的文本模型
+		List<TextModel> result = new ArrayList<TextModel>();		//记录所有生成的文本模型
 		
 		for(int i=0 ; i<ts.size() ; i++)			//对ts中所有的文本依次建立文本模型，并加入到result中
 		{
 			TextModelWordBased tm = new TextModelWordBased();
 			
-			Iterator<String> it = ts.get(i).getFeature().keySet().iterator();
+			Iterator it = ts.get(i).getFeature().keySet().iterator();
 			
 			while (it.hasNext())
 			{
-				String key = it.next();
+				String key = (String)it.next();
 				tm.getTextModel().add(key);
 			}
 			
@@ -43,7 +44,7 @@ public class EstablishModelWordBased implements EstablishModel<String>
 	}
 
 	@Override
-	public TextModel<String> modeling(Text t)
+	public TextModel modeling(Text t)
 	{
 		// TODO Auto-generated method stub
 		return null;

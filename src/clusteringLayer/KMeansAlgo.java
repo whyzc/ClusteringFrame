@@ -2,15 +2,15 @@ package clusteringLayer;
 
 import java.util.List;
 
-import similarity.TextModel;
+import model.TextModel;
 
 /**
  * 框架内部的KMeans算法层
  * @author yzc
  *
- * @param <T> 文本模型采用的数据类型
+ * @param  文本模型采用的数据类型
  */
-public interface KMeansAlgo<T>
+public interface KMeansAlgo
 {
 	/**
 	 * KMeans算法
@@ -18,5 +18,5 @@ public interface KMeansAlgo<T>
 	 * @param k 类型数
 	 * @return k个簇
 	 */
-	public List<Group<T>> kMeans(List<TextModel<T>> tm , int k);
+	public List<Group> kMeans(List<TextModel> tm , int k);
 }

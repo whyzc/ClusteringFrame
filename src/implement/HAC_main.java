@@ -23,8 +23,8 @@ public class HAC_main
 		ts.add(t3);
 		
 		/*************µ÷ÓÃKMeans**************/
-		HAC<String> userhac = new HACImpl();
-		Group<String> g = userhac.hac(ts);
+		HAC userhac = new HACImpl();
+		Group g = userhac.hac(ts);
 		
 		
 	}	
