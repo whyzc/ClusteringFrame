@@ -10,7 +10,7 @@ import java.util.*;
  */
 public abstract class TextModel
 {
-	protected List textModel = new ArrayList();				//文本模型
+	protected List textModel = new ArrayList();						//文本模型
 	protected int no = -1;											//文本编号
 	protected String title = null;									//文本标题
 	

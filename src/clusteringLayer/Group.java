@@ -219,4 +219,30 @@ public abstract class Group
 	{
 		this.initialMember = initialMember;
 	}
+	
+	/**
+	 * 遍历簇，返回簇中包含的成员，用于HAC算法
+	 * @return 簇中包含文章标题的List集合
+	 */
+	public List<String> printGroup()
+	{
+		List<String> result = new ArrayList<String>();
+		List<Group> queue = new ArrayList<Group>();
+		Group grp_tmp;
+		queue.add(this);
+		while (!queue.isEmpty())
+		{
+			grp_tmp = queue.remove(0);
+			if (grp_tmp.subGroupSize() > 0)
+			{
+				for (int i=0 ; i<grp_tmp.subGroupSize() ; i++)
+				{
+					queue.add(grp_tmp.getSubGroup().get(i));
+				}
+			}
+			result.add(grp_tmp.getInitialMember().getTitle());
+			
+		}
+		return result;
+	}
 }
