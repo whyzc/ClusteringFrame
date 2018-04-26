@@ -34,7 +34,7 @@ public class HAC_main
 		List<String> title;
 		for (int i=0 ; i<grps.size() ; i++)
 		{
-			title = grps.get(i).printGroup();
+			title = grps.get(i).getTitlesInHierarchicalGroup();
 			System.out.println(title);
 		}
 		

@@ -14,9 +14,9 @@ public class KMeans_main
 	{
 		// TODO Auto-generated method stub
 		/**********设置文本内容***************/
-		Text t1 = new TextImpl("我今天很开心", "1", 1);
-		Text t2 = new TextImpl("今天天气很好", "2", 2);
-		Text t3 = new TextImpl("月亮真的好漂亮", "3", 3);
+		Text t1 = new TextImpl("我今天很开心", "文章1", 1);
+		Text t2 = new TextImpl("今天天气很好", "文章2", 2);
+		Text t3 = new TextImpl("月亮真的好漂亮", "文章3", 3);
 		
 		List<Text> ts = new ArrayList<Text>();
 		ts.add(t1);
@@ -30,15 +30,9 @@ public class KMeans_main
 		
 		/*****************打印聚类结果*********************/
 		for (int i=0 ; i<K ; i++)
-		{
-			Iterator it  = g.get(i).getMember().iterator();
-			System.out.printf("第%d组：", i+1);
-			while(it.hasNext())
-			{
-				TextModelWordBased t = (TextModelWordBased)it.next();
-				System.out.print(t.getNo() + ", ");
-			}
-			System.out.println();
+		{		
+			List<String> titles = g.get(i).getTitlesInFlatGroup();
+			System.out.println(titles);
 		}
 	}
 }

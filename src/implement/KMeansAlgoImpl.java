@@ -97,12 +97,4 @@ public class KMeansAlgoImpl implements KMeansAlgo
 		}
 		return minDistanceSite;
 	}
-	
-//	private void updateClusterPoint(int s)
-//	{
-//		if (groups.get(s).members.size() == 1)
-//		{
-//			u.get(s).set
-//		}
-//	}
 }

@@ -221,10 +221,10 @@ public abstract class Group
 	}
 	
 	/**
-	 * 遍历簇，返回簇中包含的成员，用于HAC算法
+	 * 遍历层次簇，返回簇中包含的所有成员的标题，用于HAC算法
 	 * @return 簇中包含文章标题的List集合
 	 */
-	public List<String> printGroup()
+	public List<String> getTitlesInHierarchicalGroup()
 	{
 		List<String> result = new ArrayList<String>();
 		List<Group> queue = new ArrayList<Group>();
@@ -245,4 +245,58 @@ public abstract class Group
 		}
 		return result;
 	}
+	
+	/**
+	 * 遍历层次簇，返回簇中包含的所有成员的序号，用于HAC算法
+	 * @return 簇中包含文章序号的List集合
+	 */
+	public List<Integer> getNoInHierarchicalGroup()
+	{
+		List<Integer> result = new ArrayList<Integer>();
+		List<Group> queue = new ArrayList<Group>();
+		Group grp_tmp;
+		queue.add(this);
+		while (!queue.isEmpty())
+		{
+			grp_tmp = queue.remove(0);
+			if (grp_tmp.subGroupSize() > 0)
+			{
+				for (int i=0 ; i<grp_tmp.subGroupSize() ; i++)
+				{
+					queue.add(grp_tmp.getSubGroup().get(i));
+				}
+			}
+			result.add(grp_tmp.getInitialMember().getNo());
+			
+		}
+		return result;
+	}
+	
+	/**
+	 * 遍历扁平簇，返回簇中包含的所有成员的标题，用于KMeans算法
+	 * @return 簇中包含文章标题的List集合
+	 */
+	public List<String> getTitlesInFlatGroup()
+	{
+		List<String> result = new ArrayList<String>();
+		for (int i=0 ; i<this.member.size() ; i++)
+		{
+			result.add(this.member.get(i).getTitle());
+		}
+		return result;
+	} 
+	
+	/**
+	 * 遍历扁平簇，返回簇中包含的所有成员的序号，用于KMeans算法
+	 * @return 簇中包含文章序号的List集合
+	 */
+	public List<Integer> getNoInFlatGroup()
+	{
+		List<Integer> result = new ArrayList<Integer>();
+		for (int i=0 ; i<this.member.size() ; i++)
+		{
+			result.add(this.member.get(i).getNo());
+		}
+		return result;
+	} 
 }
