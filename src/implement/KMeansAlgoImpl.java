@@ -2,6 +2,7 @@ package implement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import clusteringLayer.Group;
 import clusteringLayer.KMeansAlgo;
@@ -14,14 +15,14 @@ import model.TextModel;
  */
 public class KMeansAlgoImpl implements KMeansAlgo
 {
-	private final int TIMES = 5;
+	private final int TIMES = 15;
 	public List<Group> groups = new ArrayList<Group>();			//簇
 	
 	@Override
 	public List<Group> kMeans(List<TextModel> tm, int k)
 	{
 		// TODO Auto-generated method stub
-		boolean sign = true;
+		boolean sign = false;
 		
 		if (tm.size() <= k)				//文本个数小于分类
 		{
@@ -30,12 +31,36 @@ public class KMeansAlgoImpl implements KMeansAlgo
 
 		groups.clear();					//对簇清空
 		
+		/*************取随机数初始化**************/
+		
+		Random random = new Random();
+		List<Integer> initRandom = new ArrayList<Integer>();
+		for (int i=0 ; i<k ; i++)		//在所有的模型中取k个随机数（存入initRandom中），用于初始化
+		{
+			int tmp = -1;
+			do{
+				tmp = random.nextInt(tm.size());
+			} while ( initRandom.contains(tmp) || tmp<0 );
+			initRandom.add(tmp);
+		}
 		for (int i=0 ; i<k ; i++)				//初始化k个簇，并设置初始聚点
 		{
-			Group g = new GroupWordBased();
-			g.setClusterPoint(tm.get(i));	
+			Group g = new GroupForSpaceVector();
+			g.setClusterPoint(((TextModelForSpaceVector)tm.get(initRandom.get(i))).clone());	
 			groups.add(g);
 		}
+		/***************************************/
+		
+		/****************顺序初始化****************/
+		/*
+		for (int i=0 ; i<k ; i++)				//初始化k个簇，并设置初始聚点
+		{
+			Group g = new GroupForSpaceVector();
+			
+			g.setClusterPoint(((TextModelForSpaceVector)tm.get(i)).clone());	
+			groups.add(g);
+		}*/
+		/*******************************************/
 		
 		for (int c=0 ; c < TIMES ; c++)			//循环TIMES次后退出聚类
 		{
@@ -56,17 +81,18 @@ public class KMeansAlgoImpl implements KMeansAlgo
 				
 			}
 			
+			sign = false;
 			for (int i=0 ; i<k ; i++)
 			{
 				if ( groups.get(i).updataClusterPoint() )			//更新聚点
 				{
-					sign = false;
+					sign = true;
 				}
 			}
 			
 			
-			
-			if (sign)								//如果所有聚点都没变，则退出聚类
+			System.out.println("...................................第" +(c+1)+ "次迭代......................................");
+			if (!sign)								//如果所有聚点都没变，则退出聚类
 				break;
 		}
 		return groups;
@@ -76,6 +102,7 @@ public class KMeansAlgoImpl implements KMeansAlgo
 	{
 		int minDistanceSite = -1;
 		double minDistance;
+		TextModelForSpaceVector tmwb = (TextModelForSpaceVector)tm;
 		if (groups.size()<1)
 		{
 			throw new RuntimeException("比较距离时，无簇");
@@ -85,16 +112,29 @@ public class KMeansAlgoImpl implements KMeansAlgo
 			throw new RuntimeException("比较距离时，只有一个簇");
 		}
 		
-		minDistance = tm.distance(groups.get(0).getClusterPoint());
+		minDistance = tmwb.distance(groups.get(0).getClusterPoint());
 		minDistanceSite = 0;
 		for (int i=1 ; i<groups.size() ; i++)
 		{
-			if (minDistance < tm.distance(groups.get(i).getClusterPoint()))			//相同字的数目越多，距离越近，这里找相同字数最多的
+			if (minDistance > tmwb.distance(groups.get(i).getClusterPoint()))			//遍历，找到最近距离
 			{
 				minDistanceSite = i;
-				minDistance = tm.distance(groups.get(i).getClusterPoint());
+				minDistance = tmwb.distance(groups.get(i).getClusterPoint());
 			}
 		}
+		
+//		if (tmwb.sim(groups.get(minDistanceSite).getClusterPoint()) < 0.2)	//和各簇相识度过低，首先往空簇中填充
+//		{
+//			for (int i=0 ; i<groups.size() ; i++)
+//			{
+//				if (groups.get(i).memberSize() < 1)
+//				{
+//					System.out.println("位子："+i);
+//					return i;
+//				}
+//			}
+//		}
+		//System.out.println("距离："+minDistance+"......位子："+minDistanceSite);
 		return minDistanceSite;
 	}
 }

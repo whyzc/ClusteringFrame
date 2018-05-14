@@ -13,7 +13,7 @@ public abstract class Group
 	protected TextModel initialMember;										//初始成员，用于层次聚类
 	
 	/**
-	 * 根据member中的成员更新聚点
+	 * 根据member中的成员更新聚点,用于KMeans算法
 	 * @return 若聚点修改返回true，反之返回false
 	 */
 	public abstract boolean updataClusterPoint();			//更新聚点，用于KMeans算法
@@ -47,7 +47,7 @@ public abstract class Group
 	
 	
 	/**
-	 * 将单个文本模型加入到本簇中
+	 * 将单个文本模型加入到本簇中，用于KMeans算法
 	 * @param member 需加入的文本模型
 	 */
 	public void addMember(TextModel member)						//增加成员
@@ -56,7 +56,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 将一组文本模型加入到本簇中
+	 * 将一组文本模型加入到本簇中，用于KMeans算法
 	 * @param members 需入的一组文本模型
 	 */
 	public void addMember(List<TextModel> members)				//增加成员
@@ -68,7 +68,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 清除本簇中的所有成员
+	 * 清除本簇中的所有成员，用于KMeans算法
 	 */
 	public void clearMember()								//清除成员
 	{
@@ -76,7 +76,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 获取本簇中成员的数量
+	 * 获取本簇中成员的数量，用于KMeans算法
 	 * @return 成员的数量
 	 */
 	public int memberSize()									//成员数量
@@ -85,7 +85,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 将一个簇与对应的相识度同时压入子簇栈和相识度栈
+	 * 将一个簇与对应的相识度同时压入子簇栈和相识度栈，用于HAC算法
 	 * @param grp 需压入栈的簇
 	 * @param s 需压入栈的相识度
 	 */
@@ -96,7 +96,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 弹出子簇栈尾的簇
+	 * 弹出子簇栈尾的簇，用于HAC算法
 	 * @return 弹出的簇
 	 */
 	public Group pushGroup()								//弹出栈尾的簇
@@ -109,7 +109,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 弹出相识度栈尾的相识度
+	 * 弹出相识度栈尾的相识度，用于HAC算法
 	 * @return 弹出的相识度
 	 */
 	public Double pushSim()									//弹出栈尾的相识度
@@ -122,7 +122,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 获取子簇栈中簇的数量
+	 * 获取子簇栈中簇的数量，用于HAC算法
 	 * @return 子簇栈中簇的数量
 	 */
 	public int subGroupSize()							//子簇的个数
@@ -131,7 +131,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 获取相识度栈中相识度的数量
+	 * 获取相识度栈中相识度的数量，用于HAC算法
 	 * @return 相识度栈中相识度的数量
 	 */
 	public int simValueSize()							//子簇对应相识度的个数
@@ -140,7 +140,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 子簇栈是否为空
+	 * 子簇栈是否为空，用于HAC算法
 	 * @return 栈空返回true，反之返回false
 	 */
 	public boolean isSubGroupEmpty()					//子簇是否为空
@@ -149,7 +149,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 获取子簇
+	 * 获取子簇，用于HAC算法
 	 * @return	返回子簇
 	 */
 	public List<Group> getSubGroup()					//获取子簇
@@ -158,7 +158,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 获取本簇所有成员
+	 * 获取本簇所有成员，用于KMeans算法
 	 * @return 本簇所有成员
 	 */
 	public List<TextModel> getMember()					//获取成员
@@ -167,7 +167,7 @@ public abstract class Group
 	}
 	
 	/**
-	 * 设置本簇成员
+	 * 设置本簇成员，用于KMeans算法
 	 * @param members 需设置的成员
 	 */
 	public void setMember(List<TextModel> members)

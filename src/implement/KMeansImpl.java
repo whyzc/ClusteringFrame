@@ -38,7 +38,7 @@ public class KMeansImpl implements KMeans
 		
 		
 		/*****************生成文本模型*********************/	
-		EstablishModel em = new EstablishModelWordBased();
+		EstablishModel em = new EstablishModelForSpaceVector();
 		List<TextModel> tms = em.modeling(ts);
 		
 		

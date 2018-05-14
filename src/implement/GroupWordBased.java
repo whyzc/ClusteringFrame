@@ -21,24 +21,24 @@ public class GroupWordBased extends Group
 	@Override
 	public boolean updataClusterPoint()
 	{
-		// TODO Auto-generated method stub
 		if (member.size()<1)				//member中无成员，无法更新聚点
 		{
 			throw new RuntimeException("簇内无成员");
 		}
 		
 		List common = new ArrayList();
-		common.addAll( ((TextModelWordBased)member.get(0)).getTextModel() );
+		common.addAll( ((TextModelWordBased)member.get(0)).getTextModelForList() );
 				//((TextModel_2)member.get(0)).getTextModel();		//记录member中各成员文本模型的交集
 		
+		String word;
 		for (int i=1 ; i<common.size() ; i++)					//求member中各成员文本模型的交集
 		{
 			
 			//new ArrayList()
-			String word = (String)common.get(i);
+			word = (String)common.get(i);
 			for (int j=1 ; j<member.size() ; j++)
 			{
-				if ( ((TextModelWordBased)member.get(j)).getTextModel().contains(word) )
+				if ( ((TextModelWordBased)member.get(j)).getTextModelForList().contains(word) )
 				{
 					continue;
 				}
@@ -49,7 +49,7 @@ public class GroupWordBased extends Group
 		}
 		
 		/***************验证common与原聚点是否相同，不相同则更新聚点并返回false，相同则返回true*******************/
-		List s = ((TextModelWordBased)clusterPoint).getTextModel();
+		List s = ((TextModelWordBased)clusterPoint).getTextModelForList();
 		if (s.size() != common.size())
 		{
 			((TextModelWordBased)clusterPoint).setTextModel(common);
@@ -77,7 +77,7 @@ public class GroupWordBased extends Group
 		
 		if (tm instanceof TextModelWordBased)
 		{
-			tm2.setTextModel( ((TextModelWordBased)tm).getTextModel() );
+			tm2.setTextModel( ((TextModelWordBased)tm).getTextModelForList() );
 		}
 		else 
 		{

@@ -31,7 +31,7 @@ public class EstablishModelWordBased implements EstablishModel
 			while (it.hasNext())
 			{
 				String key = (String)it.next();
-				tm.getTextModel().add(key);
+				tm.getTextModelForList().add(key);
 			}
 			
 			tm.setNo(ts.get(i).getNo());			//…Ë÷√Œƒ±æ±‡∫≈

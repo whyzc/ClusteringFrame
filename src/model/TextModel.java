@@ -10,9 +10,9 @@ import java.util.*;
  */
 public abstract class TextModel
 {
-	protected List textModel = new ArrayList();						//文本模型
-	protected int no = -1;											//文本编号
-	protected String title = null;									//文本标题
+	
+	private int no = -1;											//文本编号
+	private String title = null;									//文本标题
 	
 	/**
 	 * 计算两模型间的距离
@@ -68,22 +68,8 @@ public abstract class TextModel
 	{
 		this.title = title;
 	}
-
-	/**获取文本模型
-	 * @return 文本模型
-	 */
-	public List getTextModel()
-	{
-		return textModel;
-	}
-
-	/**设置文本模型
-	 * @param textModel 需设置的文本模型
-	 */
-	public void setTextModel(List textModel)
-	{
-		this.textModel = textModel;
-	}
+	
+	
 
 	
 	

@@ -1,5 +1,6 @@
 package implement;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 import clustering.KMeans;
@@ -8,20 +9,17 @@ import text.Text;
 
 public class KMeans_main
 {
-	private final static int K = 2;
+	private final static int K = 4;
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
 		// TODO Auto-generated method stub
 		/**********设置文本内容***************/
-		Text t1 = new TextImpl("我今天很开心", "文章1", 1);
-		Text t2 = new TextImpl("今天天气很好", "文章2", 2);
-		Text t3 = new TextImpl("月亮真的好漂亮", "文章3", 3);
-		
 		List<Text> ts = new ArrayList<Text>();
-		ts.add(t1);
-		ts.add(t2);
-		ts.add(t3);
+		//DocInit di = new DocInit("样本6个");
+		DocInit di = new DocInit("样本217个");
+		//DocInit di = new DocInit("D:\\JavaProjForJse\\tc-corpus-answer\\answer");
+		di.readFile(ts);
 		
 		/*************调用KMeans**************/
 		KMeans userkm = new KMeansImpl();
@@ -34,5 +32,21 @@ public class KMeans_main
 			List<String> titles = g.get(i).getTitlesInFlatGroup();
 			System.out.println(titles);
 		}
+		
+		/*****************评价****************************/
+		System.out.println();
+		System.out.println();
+		System.out.println("/*****************评价****************************/");
+		Evaluation eva = new Evaluation(g);
+		eva.generateSampleSet(di.getTotalTitles());
+		double purity = eva.purity();
+		double ri = eva.RI();
+		double f1 = eva.FValue(1);
+		double f5 = eva.FValue(5);
+		System.out.println("纯度为："+purity);
+		System.out.println("RI = "+ri);
+		System.out.println("F1 = "+f1);
+		System.out.println("F5 = "+f5);
+
 	}
 }
