@@ -13,9 +13,9 @@ public class HAC_main
 		// TODO Auto-generated method stub
 		
 		/**********设置文本内容***************/
-		Text t1 = new TextImpl("我今天很开心", "文章1", 1);
-		Text t2 = new TextImpl("今天天气很好", "文章2", 2);
-		Text t3 = new TextImpl("月亮真的好漂亮", "文章3", 3);
+		Text t1 = new Text("我今天很开心", "文章1");
+		Text t2 = new Text("今天天气很好", "文章2");
+		Text t3 = new Text("月亮真的好漂亮", "文章3");
 		
 		List<Text> ts = new ArrayList<Text>();
 		ts.add(t1);
@@ -28,7 +28,7 @@ public class HAC_main
 		
 		/**************对聚类后的簇进行分割****************/
 //		List<Group> grps = userhac.split(g, 2);
-		List<Group> grps = userhac.split(g, 0.02);
+		List<Group> grps = userhac.split(g, 0.3);
 		
 		/**************打印结果****************/
 		List<String> title;

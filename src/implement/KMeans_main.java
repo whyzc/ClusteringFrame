@@ -9,16 +9,17 @@ import text.Text;
 
 public class KMeans_main
 {
-	private final static int K = 4;
+	private final static int K = 3;
 	
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		// TODO Auto-generated method stub
 		/**********设置文本内容***************/
 		List<Text> ts = new ArrayList<Text>();
-		//DocInit di = new DocInit("样本6个");
-		DocInit di = new DocInit("样本217个");
-		//DocInit di = new DocInit("D:\\JavaProjForJse\\tc-corpus-answer\\answer");
+		//DocInit di = new DocInit("样本6个", "-");
+		DocInit di = new DocInit("样本217个", "-");		
+		//DocInit di = new DocInit("D:\\JavaProjForJse\\ClusteringFrame\\新建文件夹");
+		//DocInit di = new DocInit("D:\\JavaProjForJse\\语料库\\tc-corpus-answer", null);
 		di.readFile(ts);
 		
 		/*************调用KMeans**************/
@@ -37,8 +38,7 @@ public class KMeans_main
 		System.out.println();
 		System.out.println();
 		System.out.println("/*****************评价****************************/");
-		Evaluation eva = new Evaluation(g);
-		eva.generateSampleSet(di.getTotalTitles());
+		Evaluation eva = new Evaluation(g, di);
 		double purity = eva.purity();
 		double ri = eva.RI();
 		double f1 = eva.FValue(1);

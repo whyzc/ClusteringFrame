@@ -15,7 +15,7 @@ import model.TextModel;
  */
 public class KMeansAlgoImpl implements KMeansAlgo
 {
-	private final int TIMES = 15;
+	private final int TIMES = 50;
 	public List<Group> groups = new ArrayList<Group>();			//簇
 	
 	@Override
@@ -91,7 +91,7 @@ public class KMeansAlgoImpl implements KMeansAlgo
 			}
 			
 			
-			System.out.println("...................................第" +(c+1)+ "次迭代......................................");
+			//System.out.println("...................................第" +(c+1)+ "次迭代......................................");
 			if (!sign)								//如果所有聚点都没变，则退出聚类
 				break;
 		}

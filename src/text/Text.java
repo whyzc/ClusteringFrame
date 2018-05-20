@@ -2,16 +2,29 @@ package text;
 
 import java.util.*;
 
-public abstract class Text
+public class Text
 {
-	protected String content = null;				//文章内容
-	protected String title = null;					//文章题目
-	protected int no = -1;							//文章编号
-	protected Map<String, Double> feature = null;					//文章的特征
+	private String content = null;								//文章内容
+	private String title = null;								//文章题目
+	private static int NEXTID = 0;								//用于累加文档编号
+	private int no;												//文章序号
+	private Map<String, Double> feature = null;					//文章的特征
 
 	public Text()
 	{
-		
+		this.no= NEXTID;
+		NEXTID++;	
+	}
+	
+	public Text(String content)
+	{
+		this.content = content;
+	}
+	
+	public Text(String content, String title)
+	{
+		this.content = content;
+		this.title = title;
 	}
 	
 	public String getContent()
@@ -43,11 +56,6 @@ public abstract class Text
 	public int getNo()
 	{
 		return no;
-	}
-
-	public void setNo(int no)
-	{
-		this.no = no;
 	}
 
 	public Map<String, Double> getFeature()
