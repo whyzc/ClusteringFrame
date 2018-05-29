@@ -22,7 +22,7 @@ public class HACImpl implements HAC
 	{
 		// TODO Auto-generated method stub
 		/***************对文本生成特征******************/
-		GenerateFeature gf = new GenerateFeatureWordBased();
+		GenerateFeature gf = new GenerateFeatureCharacterBased();
 		for (int i=0 ; i<ts.size() ; i++)
 		{
 			gf.generateFeature(ts.get(i));
@@ -30,7 +30,7 @@ public class HACImpl implements HAC
 		
 		
 		/*****************生成文本模型*********************/	
-		EstablishModel em = new EstablishModelWordBased();
+		EstablishModel em = new EstablishModelCharacterBased();
 		List<TextModel> tms = em.modeling(ts);
 		
 		

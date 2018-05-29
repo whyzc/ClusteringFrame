@@ -59,6 +59,7 @@ public abstract class TextModelForArray extends TextModel
 		if (denominater == 0)
 		{
 			return 0;
+			
 		}
 		else
 		{

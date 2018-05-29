@@ -3,7 +3,7 @@ package implement;
 import model.TextModel;
 import model.TextModelForArray;
 
-public class TextModelForSpaceVector extends TextModelForArray
+public class TextModelForVectorSpace extends TextModelForArray
 {
 
 	@Override
@@ -33,9 +33,9 @@ public class TextModelForSpaceVector extends TextModelForArray
 		
 	}
 	
-	public TextModelForSpaceVector clone() 
+	public TextModelForVectorSpace clone() 
 	{
-		TextModelForSpaceVector result = new TextModelForSpaceVector();
+		TextModelForVectorSpace result = new TextModelForVectorSpace();
 		result.setTextModelForArray(this.getTextModelForArray().clone());
 		return result;
 	}

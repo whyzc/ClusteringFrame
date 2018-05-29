@@ -45,23 +45,13 @@ public class KMeansAlgoImpl implements KMeansAlgo
 		}
 		for (int i=0 ; i<k ; i++)				//初始化k个簇，并设置初始聚点
 		{
-			Group g = new GroupForSpaceVector();
-			g.setClusterPoint(((TextModelForSpaceVector)tm.get(initRandom.get(i))).clone());	
+			Group g = new GroupForVectorSpace();
+			g.setClusterPoint(((TextModelForVectorSpace)tm.get(initRandom.get(i))).clone());	
 			groups.add(g);
 		}
 		/***************************************/
 		
-		/****************顺序初始化****************/
-		/*
-		for (int i=0 ; i<k ; i++)				//初始化k个簇，并设置初始聚点
-		{
-			Group g = new GroupForSpaceVector();
-			
-			g.setClusterPoint(((TextModelForSpaceVector)tm.get(i)).clone());	
-			groups.add(g);
-		}*/
-		/*******************************************/
-		
+		int forPrint = -1;
 		for (int c=0 ; c < TIMES ; c++)			//循环TIMES次后退出聚类
 		{
 			if (groups.size() != k)
@@ -90,11 +80,17 @@ public class KMeansAlgoImpl implements KMeansAlgo
 				}
 			}
 			
-			
+			forPrint = c;
 			//System.out.println("...................................第" +(c+1)+ "次迭代......................................");
 			if (!sign)								//如果所有聚点都没变，则退出聚类
 				break;
 		}
+		
+		if (forPrint >= TIMES)
+			System.out.println("共迭代" + forPrint + "次");
+		else
+			System.out.println("共迭代" + (forPrint+1) + "次");
+			
 		return groups;
 	}
 	
@@ -102,7 +98,7 @@ public class KMeansAlgoImpl implements KMeansAlgo
 	{
 		int minDistanceSite = -1;
 		double minDistance;
-		TextModelForSpaceVector tmwb = (TextModelForSpaceVector)tm;
+		TextModelForVectorSpace tmwb = (TextModelForVectorSpace)tm;
 		if (groups.size()<1)
 		{
 			throw new RuntimeException("比较距离时，无簇");
@@ -112,14 +108,20 @@ public class KMeansAlgoImpl implements KMeansAlgo
 			throw new RuntimeException("比较距离时，只有一个簇");
 		}
 		
-		minDistance = tmwb.distance(groups.get(0).getClusterPoint());
+		//minDistance = tmwb.distance(groups.get(0).getClusterPoint());
+		minDistance = 10*tmwb.sim(groups.get(0).getClusterPoint());
 		minDistanceSite = 0;
 		for (int i=1 ; i<groups.size() ; i++)
 		{
-			if (minDistance > tmwb.distance(groups.get(i).getClusterPoint()))			//遍历，找到最近距离
+//			if (minDistance > tmwb.distance(groups.get(i).getClusterPoint()))			//遍历，找到最近距离
+//			{
+//				minDistanceSite = i;
+//				minDistance = tmwb.distance(groups.get(i).getClusterPoint());
+//			}
+			if (minDistance < 10 * tmwb.sim(groups.get(i).getClusterPoint()))			//遍历，找到相识度最高的
 			{
 				minDistanceSite = i;
-				minDistance = tmwb.distance(groups.get(i).getClusterPoint());
+				minDistance = 10 * tmwb.sim(groups.get(i).getClusterPoint());
 			}
 		}
 		

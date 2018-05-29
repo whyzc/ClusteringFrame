@@ -4,11 +4,11 @@ import clusteringLayer.Group;
 import model.TextModel;
 import model.TextModelForArray;
 
-public class GroupForSpaceVector extends Group
+public class GroupForVectorSpace extends Group
 {
-	public GroupForSpaceVector() 
+	public GroupForVectorSpace() 
 	{
-		this.clusterPoint = new TextModelForSpaceVector();
+		this.clusterPoint = new TextModelForVectorSpace();
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class GroupForSpaceVector extends Group
 			throw new RuntimeException("簇内无成员");
 		}
 		
-		TextModelForSpaceVector tmfsv = (TextModelForSpaceVector)clusterPoint;
+		TextModelForVectorSpace tmfsv = (TextModelForVectorSpace)clusterPoint;
 		int dimension = ((TextModelForArray)member.get(0)).getTextModelForArray().length;
 		
 		double[] newClusterPoint = new double[dimension];

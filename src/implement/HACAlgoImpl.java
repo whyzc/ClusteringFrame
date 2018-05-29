@@ -20,7 +20,7 @@ public class HACAlgoImpl implements HACAlgo
 		List<Group> grps = new ArrayList<Group>();
 		for (int i=0 ; i<tms.size() ; i++)				//每一个文本分为一个簇
 		{
-			Group g = new GroupWordBased();
+			Group g = new GroupCharacterBased();
 			g.setInitialMember(tms.get(i));
 			grps.add(g);
 		}

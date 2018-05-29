@@ -10,12 +10,12 @@ import model.TextModel;
  * @author yzc
  *
  */
-public class GroupWordBased extends Group
+public class GroupCharacterBased extends Group
 {
 
-	public GroupWordBased()
+	public GroupCharacterBased()
 	{
-		clusterPoint = new TextModelWordBased();
+		clusterPoint = new TextModelCharacterBased();
 	}
 	
 	@Override
@@ -27,7 +27,7 @@ public class GroupWordBased extends Group
 		}
 		
 		List common = new ArrayList();
-		common.addAll( ((TextModelWordBased)member.get(0)).getTextModelForList() );
+		common.addAll( ((TextModelCharacterBased)member.get(0)).getTextModelForList() );
 				//((TextModel_2)member.get(0)).getTextModel();		//记录member中各成员文本模型的交集
 		
 		String word;
@@ -38,7 +38,7 @@ public class GroupWordBased extends Group
 			word = (String)common.get(i);
 			for (int j=1 ; j<member.size() ; j++)
 			{
-				if ( ((TextModelWordBased)member.get(j)).getTextModelForList().contains(word) )
+				if ( ((TextModelCharacterBased)member.get(j)).getTextModelForList().contains(word) )
 				{
 					continue;
 				}
@@ -49,10 +49,10 @@ public class GroupWordBased extends Group
 		}
 		
 		/***************验证common与原聚点是否相同，不相同则更新聚点并返回false，相同则返回true*******************/
-		List s = ((TextModelWordBased)clusterPoint).getTextModelForList();
+		List s = ((TextModelCharacterBased)clusterPoint).getTextModelForList();
 		if (s.size() != common.size())
 		{
-			((TextModelWordBased)clusterPoint).setTextModel(common);
+			((TextModelCharacterBased)clusterPoint).setTextModel(common);
 			return false;
 		}
 		
@@ -60,7 +60,7 @@ public class GroupWordBased extends Group
 		{
 			if (!s.contains(common.get(i)))
 			{
-				((TextModelWordBased)clusterPoint).setTextModel(common);
+				((TextModelCharacterBased)clusterPoint).setTextModel(common);
 				return false;
 			}
 		}
@@ -73,11 +73,11 @@ public class GroupWordBased extends Group
 	{
 		// TODO Auto-generated method stub
 		
-		TextModelWordBased tm2 = (TextModelWordBased)clusterPoint;
+		TextModelCharacterBased tm2 = (TextModelCharacterBased)clusterPoint;
 		
-		if (tm instanceof TextModelWordBased)
+		if (tm instanceof TextModelCharacterBased)
 		{
-			tm2.setTextModel( ((TextModelWordBased)tm).getTextModelForList() );
+			tm2.setTextModel( ((TextModelCharacterBased)tm).getTextModelForList() );
 		}
 		else 
 		{

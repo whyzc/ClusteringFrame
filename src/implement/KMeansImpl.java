@@ -30,15 +30,18 @@ public class KMeansImpl implements KMeans
 	{
 		// TODO Auto-generated method stub
 		/***************对文本生成特征******************/
-		GenerateFeature gf = new GenerateFeatureWordBased();
+//		GenerateFeature gf = new GenerateFeatureCharacterBased();
+		GenerateFeature gf = new GenerateFeatureWordsBased();
 		for (int i=0 ; i<ts.size() ; i++)
 		{
 			gf.generateFeature(ts.get(i));
 		}
 		
 		
+		
+		
 		/*****************生成文本模型*********************/	
-		EstablishModel em = new EstablishModelForSpaceVector();
+		EstablishModel em = new EstablishModelWordsBased();
 		List<TextModel> tms = em.modeling(ts);
 		
 		

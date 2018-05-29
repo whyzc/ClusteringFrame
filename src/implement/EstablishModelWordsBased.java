@@ -6,7 +6,7 @@ import model.EstablishModel;
 import model.TextModel;
 import text.Text;
 
-public class EstablishModelForSpaceVector implements EstablishModel
+public class EstablishModelWordsBased implements EstablishModel
 {
 
 	@Override
@@ -19,7 +19,7 @@ public class EstablishModelForSpaceVector implements EstablishModel
 	@Override
 	public List<TextModel> modeling(List<Text> ts)
 	{
-		List<String> totalSpace = new ArrayList<String>();
+		Map<String, Integer> totalSpace = new TreeMap<String, Integer>();
 		List<TextModel> result = new ArrayList<TextModel>();
 		
 		for(int i=0 ; i<ts.size() ; i++)			//构建一个总空间
@@ -29,26 +29,42 @@ public class EstablishModelForSpaceVector implements EstablishModel
 			while (it.hasNext())
 			{
 				String key = (String)it.next();
-				if (!totalSpace.contains(key))
-					totalSpace.add(key);
+				if (!totalSpace.containsKey(key))
+					totalSpace.put(key, 1);
+				else
+				{
+					int tmp;
+					tmp = totalSpace.get(key) + 1;
+					totalSpace.put(key, tmp);
+				}
 			}
-			totalSpace.sort(null);
 		}
 		
+		System.out.println(totalSpace.size());
 		for(int i=0 ; i<ts.size() ; i++)			//建立空间向量模型
 		{
-			TextModelForSpaceVector tm = new TextModelForSpaceVector();
-			double[] v = new double[totalSpace.size()];
+			TextModelForVectorSpace tm;
+			tm = new TextModelForVectorSpace();
+			Iterator<String> allFeatures = totalSpace.keySet().iterator();
+			double[] v;
+			v = new double[totalSpace.size()];
 			
-			for (int j=0 ; j<totalSpace.size() ; j++)
+			int site = 0;
+			while (allFeatures.hasNext())
 			{
-				if (ts.get(i).getFeature().containsKey(totalSpace.get(j)))
+				String key = allFeatures.next();
+				
+				if (ts.get(i).getFeature().containsKey(key))
 				{
-					v[j]=1;
+					v[site] = weight(ts.get(i).getFeature().get(key), totalSpace.get(key), ts.size());
 				}
 				else
-					v[j]=0;
+				{
+					v[site] = 0;
+				}
+				site++;
 			}
+			
 			
 			tm.setTextModelForArray(v);
 			if (tm.getTextModelForArray().length != totalSpace.size())
@@ -61,6 +77,12 @@ public class EstablishModelForSpaceVector implements EstablishModel
 			result.add(tm);
 		}
 		return result;
+	}
+	
+	private double weight(double tf, double df, int n)
+	{
+		
+		return tf*Math.log(n/df);
 	}
 
 }

@@ -10,7 +10,7 @@ import text.Text;
  * @author yzc
  *
  */
-public class GenerateFeatureWordBased implements GenerateFeature
+public class GenerateFeatureCharacterBased implements GenerateFeature
 {
 
 	@Override

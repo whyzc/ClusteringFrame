@@ -13,7 +13,7 @@ import text.Text;
  * @author yzc
  *
  */
-public class EstablishModelWordBased implements EstablishModel
+public class EstablishModelCharacterBased implements EstablishModel
 {
 
 	@Override
@@ -24,7 +24,8 @@ public class EstablishModelWordBased implements EstablishModel
 		
 		for(int i=0 ; i<ts.size() ; i++)			//对ts中所有的文本依次建立文本模型，并加入到result中
 		{
-			TextModelWordBased tm = new TextModelWordBased();
+			TextModelCharacterBased tm;
+			tm = new TextModelCharacterBased();
 			
 			Iterator it = ts.get(i).getFeature().keySet().iterator();
 			

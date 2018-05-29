@@ -10,9 +10,9 @@ import model.TextModelForList;
  * @author yzc
  *
  */
-public class TextModelWordBased extends TextModelForList
+public class TextModelCharacterBased extends TextModelForList
 {
-	public TextModelWordBased()
+	public TextModelCharacterBased()
 	{
 		this.setTextModelForList(new ArrayList<String>());
 	}
@@ -21,7 +21,7 @@ public class TextModelWordBased extends TextModelForList
 	{
 		// TODO Auto-generated method stub
 		double count = 0;
-		TextModelWordBased tm2 = (TextModelWordBased)tm;
+		TextModelCharacterBased tm2 = (TextModelCharacterBased)tm;
 		for (int i=0 ; i<this.getTextModelForList().size() ; i++)
 		{
 			String str = (String)this.getTextModelForList().get(i);
@@ -36,7 +36,7 @@ public class TextModelWordBased extends TextModelForList
 	@Override
 	public double sim(TextModel tm)
 	{
-		TextModelWordBased tmwb = (TextModelWordBased)tm;
+		TextModelCharacterBased tmwb = (TextModelCharacterBased)tm;
 		double inter = this.distance(tm);
 		double result = inter / (this.getTextModelForList().size() + tmwb.getTextModelForList().size() - inter);
 		return result;
